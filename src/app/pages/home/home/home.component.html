@@ -1,0 +1,106 @@
+<div class = "main-header">
+    <div class = "title">
+        <h1 >Green Leaves</h1>
+    </div>
+    <div class = "icon">
+        <img src="https://cdn3.iconfinder.com/data/icons/spring-23/32/leaf-spring-plant-ecology-green-256.png"
+            onerror="this.alt = 'Leaf'"
+            width="120" height="120" alt="GreenLeaves" />
+    </div>
+</div>
+<!-- Form -->
+<form class="form"
+    [formGroup] = "_formGroup" 
+    (ngSubmit)="logEvent('submit',$event)">
+    <mat-form-field>
+        <mat-label>Nombre:</mat-label>
+        <input 
+            matInput 
+            placeholder="Campo requerido" 
+            required = "true"
+            formControlName = "name">
+        <mat-error 
+            *ngIf="logEvent('valid', 'name')">
+            Nombre es requerido
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>E-mail:</mat-label>
+        <input 
+            type="email"
+            matInput 
+            placeholder="ejemplo@ejemplo.com" 
+            required = "true"
+            formControlName = "email">
+        <mat-error *ngIf="logEvent('valid', 'email')">
+            {{_leyend_mail}}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Teléfono:</mat-label>
+        <input 
+            matInput 
+            placeholder="Campo requerido" 
+            required = "true"
+            formControlName = "phone">
+        <mat-error 
+            *ngIf="logEvent('valid', 'phone')">
+            {{_leyend_phone}}
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Fecha:</mat-label>
+        <input matInput 
+            [min]="_minDate" 
+            [max]="_maxDate"
+            [matDatepicker]="picker"  
+            [required]="true"
+            formControlName = "date">
+    <mat-error 
+            *ngIf="logEvent('valid', 'date')">
+            Fecha es requerido
+        </mat-error>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker  #picker></mat-datepicker>
+      </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Ciudad y estado:</mat-label>
+        <input 
+            matInput 
+            placeholder="Campo requerido" 
+            required = "true"
+            formControlName = "city"
+            [matAutocomplete]="auto">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let option of _cities" [value]="option.name">
+                {{option.name}}
+            </mat-option>
+        </mat-autocomplete>
+        <mat-error 
+            *ngIf="logEvent('valid', 'city')">
+            Ciudad es requerido
+        </mat-error>
+    </mat-form-field>
+    <br>
+    <ngx-recaptcha2 #captchaElem
+        required = "true"
+        [siteKey]="_siteKey"
+        formControlName="recaptcha"
+        (success) = "logEvent('onCaptchaSuccess', $event)"
+        (expire)="logEvent('onCaptchaExpire', $event)">
+    </ngx-recaptcha2>
+
+    <button mat-button class="btn"
+        type = "submit"
+        (click) = "logEvent('send', $event)">Enviar</button>
+    
+    
+
+</form>
+<!-- End Form -->
+
+

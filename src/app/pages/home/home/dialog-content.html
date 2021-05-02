@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Contacto</h2>
+<mat-dialog-content class="mat-typography my-mat-dialog-container">
+    <h3>Se encontraron los siguientes errores</h3>
+
+    <li *ngFor = "let error of _listError" >
+        {{error}}
+    </li>
+    <div *ngIf = "_listError.length == 0">
+        <b>Complete el captcha</b>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Aceptar</button>
+  </mat-dialog-actions> 

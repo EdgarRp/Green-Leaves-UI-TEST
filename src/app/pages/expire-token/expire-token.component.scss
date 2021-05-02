@@ -1,0 +1,23 @@
+:host{
+    
+    .btn{
+        border-radius: 4px;
+        border: none;
+        background-color: white;
+        box-shadow: 0px 0px 2px #e2dfdf;
+        padding: 10px;
+        float: right;
+    }
+    .btn:hover{
+        background-color: #ebf8ff;
+        box-shadow: 0px 0px 2px #3690ff;
+    }
+    ::ng-deep {
+        .button {
+            &.mat-button{
+                background: #fefeff;
+                color: #07a773;
+            }
+        }
+    }
+}
